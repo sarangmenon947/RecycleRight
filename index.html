@@ -553,12 +553,6 @@
       );
       features.forEach((f) => observer.observe(f));
 
-      const API_KEY = "AIzaSyB2esO3n3b-AgYY1n50ikk0JWnpuZUyvnI";
-      const API_URL =
-        "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent";
-      const SYSTEM_CONTEXT =
-        "You are a helpful recycling assistant. Answer questions about what can be recycled, how to recycle items, and general recycling practices. Keep answers clear and concise.";
-
       const chatbotToggle = document.getElementById("chatbot-toggle");
       const chatbotWidget = document.getElementById("chatbot-widget");
       const closeBtn = document.getElementById("close-chatbot");
@@ -585,37 +579,29 @@
 
       async function askChatbot(userQuestion) {
         try {
-          const response = await fetch(`${API_URL}?key=${API_KEY}`, {
-            method: "POST",
+          const response = await fetch('/api/chat', {
+            method: 'POST',
             headers: {
-              "Content-Type": "application/json",
+              'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-              contents: [
-                {
-                  parts: [
-                    {
-                      text: `${SYSTEM_CONTEXT}\n\nUser question: ${userQuestion}`,
-                    },
-                  ],
-                },
-              ],
-            }),
+              question: userQuestion
+            })
           });
 
           const data = await response.json();
 
-          if (data.candidates && data.candidates[0]) {
-            return data.candidates[0].content.parts[0].text;
+          if (data.answer) {
+            return data.answer;
           } else if (data.error) {
-            console.error("API Error:", data.error);
-            return "Sorry, there was an API error: " + data.error.message;
+            console.error('API Error:', data.error);
+            return 'Sorry, there was an error: ' + data.error;
           } else {
-            return "Sorry, I could not generate a response.";
+            return 'Sorry, I could not generate a response.';
           }
         } catch (error) {
-          console.error("Error:", error);
-          return "Sorry, there was an error processing your question.";
+          console.error('Error:', error);
+          return 'Sorry, there was an error processing your question.';
         }
       }
 
