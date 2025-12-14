@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RecycleRight</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link href="styles.css" rel="stylesheet" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        font-family: "Inter", sans-serif;
+        background: linear-gradient(135deg, #fff8e1, #ffe0b2);
+        color: #333;
+        line-height: 1.6;
+      }
+
+      header {
+        position: fixed;
+        width: 100%;
+        top: 0;
+        z-index: 1000;
+        background: linear-gradient(135deg, #4caf50, #2e7d32);
+        padding: 20px 0;
+        text-align: center;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+        backdrop-filter: blur(10px);
+      }
+      .logo {
+        height: 90px;
+        transition: transform 0.5s ease, box-shadow 0.3s ease;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        border-radius: 15px;
+      }
+      .logo:hover {
+        transform: scale(1.2) rotate(360deg);
+        box-shadow: 0 12px 35px rgba(0, 0, 0, 0.3);
+      }
+
+      nav {
+        margin-top: 120px;
+        background: rgba(46, 125, 50, 0.95);
+        padding: 0;
+        border-top: 2px solid rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(5px);
+      }
+      .nav-links {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        list-style: none;
+      }
+      .nav-links a {
+        color: #fff;
+        text-decoration: none;
+        font-weight: 600;
+        padding: 18px 30px;
+        border-radius: 8px;
+        position: relative;
+        transition: 0.3s ease;
+      }
+      .nav-links a:hover {
+        background: rgba(255, 255, 255, 0.1);
+        color: #ffd54f;
+      }
+
+      .container {
+        width: 90%;
+        max-width: 1200px;
+        margin: 3rem auto;
+      }
+
+      .features {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 25px;
+        margin-bottom: 60px;
+      }
+      .feature {
+        background: linear-gradient(135deg, #ffd54f, #ffb300);
+        padding: 30px;
+        border-radius: 20px;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        text-align: center;
+        color: #fff;
+        transform: translateY(50px);
+        opacity: 0;
+        transition: transform 0.5s ease, box-shadow 0.3s ease;
+      }
+      .feature:hover {
+        transform: translateY(-7px);
+        box-shadow: 0 20px 45px rgba(0, 0, 0, 0.3);
+      }
+      .feature i {
+        font-size: 3rem;
+        margin-bottom: 15px;
+        display: block;
+      }
+      .feature h2 {
+        margin-bottom: 12px;
+        font-size: 1.5rem;
+      }
+      .feature p {
+        font-size: 1rem;
+        line-height: 1.7;
+      }
+
+      .about-section {
+        background: linear-gradient(135deg, #ffffff, #f5f5f5);
+        padding: 50px 40px;
+        border-radius: 20px;
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        text-align: center;
+        margin-bottom: 50px;
+        transform: translateY(30px);
+        opacity: 0;
+      }
+      .about-section h2 {
+        color: #2e7d32;
+        font-size: 2.5rem;
+        margin-bottom: 20px;
+        position: relative;
+        display: inline-block;
+      }
+      .about-section h2::after {
+        content: "";
+        position: absolute;
+        bottom: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 60px;
+        height: 4px;
+        background: linear-gradient(90deg, #ffd54f, #ffb300);
+        border-radius: 2px;
+      }
+      .about-section p {
+        font-size: 1.2rem;
+        margin-bottom: 10px;
+        color: #555;
+      }
+
+      .contact-section {
+        background: linear-gradient(135deg, #e0f7fa, #b2ebf2);
+        padding: 50px 40px;
+        border-radius: 20px;
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        text-align: center;
+        margin-bottom: 50px;
+        transform: translateY(30px);
+        opacity: 0;
+      }
+      .contact-section h2 {
+        color: #00796b;
+        font-size: 2.5rem;
+        margin-bottom: 20px;
+        position: relative;
+        display: inline-block;
+      }
+      .contact-section h2::after {
+        content: "";
+        position: absolute;
+        bottom: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 60px;
+        height: 4px;
+        background: linear-gradient(90deg, #4dd0e1, #00bcd4);
+        border-radius: 2px;
+      }
+      .contact-section p {
+        font-size: 1.2rem;
+        margin-bottom: 12px;
+        color: #555;
+      }
+      .contact-section a {
+        color: #00796b;
+        font-weight: 600;
+        text-decoration: none;
+      }
+      .contact-section a:hover {
+        text-decoration: underline;
+      }
+
+      footer {
+        background: linear-gradient(135deg, #2e7d32, #1b5e20);
+        color: #fff;
+        text-align: center;
+        padding: 30px 0;
+        box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.15);
+      }
+
+      #chatbot-toggle {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #4caf50, #2e7d32);
+        border: none;
+        cursor: pointer;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 28px;
+        transition: transform 0.3s, box-shadow 0.3s;
+        z-index: 1000;
+      }
+
+      #chatbot-toggle:hover {
+        transform: scale(1.1);
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+      }
+
+      #chatbot-widget {
+        position: fixed;
+        bottom: 100px;
+        right: 30px;
+        width: 400px;
+        height: 550px;
+        background: white;
+        border-radius: 16px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+        display: none;
+        flex-direction: column;
+        overflow: hidden;
+        z-index: 999;
+        animation: slideUp 0.3s ease-out;
+      }
+
+      #chatbot-widget.active {
+        display: flex;
+      }
+
+      @keyframes slideUp {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .chatbot-header {
+        background: linear-gradient(135deg, #4caf50, #2e7d32);
+        color: white;
+        padding: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .chatbot-header h2 {
+        font-size: 18px;
+        font-weight: 600;
+      }
+
+      .close-btn {
+        background: none;
+        border: none;
+        color: white;
+        font-size: 24px;
+        cursor: pointer;
+        padding: 0;
+        width: 30px;
+        height: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: transform 0.2s;
+      }
+
+      .close-btn:hover {
+        transform: rotate(90deg);
+      }
+
+      #chatbox {
+        flex: 1;
+        padding: 20px;
+        overflow-y: auto;
+        background: #f9f9f9;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .message {
+        margin: 8px 0;
+        padding: 12px 16px;
+        border-radius: 12px;
+        max-width: 75%;
+        word-wrap: break-word;
+        animation: fadeIn 0.3s;
+        line-height: 1.5;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .user {
+        background: #bee3f8;
+        align-self: flex-end;
+        border-bottom-right-radius: 4px;
+      }
+
+      .bot {
+        background: #c6f6d5;
+        align-self: flex-start;
+        border-bottom-left-radius: 4px;
+      }
+
+      .chat-form {
+        display: flex;
+        padding: 15px;
+        background: white;
+        border-top: 1px solid #e2e8f0;
+        gap: 10px;
+      }
+
+      .chat-input {
+        flex: 1;
+        padding: 12px 16px;
+        font-size: 15px;
+        border-radius: 24px;
+        border: 1px solid #cbd5e0;
+        outline: none;
+        transition: border-color 0.2s;
+      }
+
+      .chat-input:focus {
+        border-color: #4caf50;
+      }
+
+      .send-btn {
+        padding: 12px 20px;
+        font-size: 15px;
+        border-radius: 24px;
+        border: none;
+        background: linear-gradient(135deg, #4caf50, #2e7d32);
+        color: white;
+        cursor: pointer;
+        transition: transform 0.2s, box-shadow 0.2s;
+        font-weight: 600;
+      }
+
+      .send-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(76, 175, 80, 0.3);
+      }
+
+      .send-btn:active {
+        transform: translateY(0);
+      }
+
+      .send-btn:disabled {
+        background: #a0aec0;
+        cursor: not-allowed;
+        transform: none;
+      }
+
+      @media (max-width: 900px) {
+        .nav-links {
+          flex-direction: column;
+        }
+        .nav-links a {
+          width: 100%;
+          text-align: center;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+      }
+
+      @media (max-width: 480px) {
+        #chatbot-widget {
+          width: calc(100vw - 20px);
+          right: 10px;
+          left: 10px;
+          bottom: 90px;
+          height: 500px;
+        }
+
+        #chatbot-toggle {
+          right: 20px;
+          bottom: 20px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <a href="https://postimages.org/" target="_blank">
+        <img
+          src="https://i.postimg.cc/ZqX5gQ72/Logo-1.png"
+          alt="RecycleRight Logo"
+          class="logo"
+        />
+      </a>
+    </header>
+
+    <nav>
+      <div class="nav-links">
+        <a href="#">Home</a>
+        <a href="about.html">About Us</a>
+        <a href="contact.html">Contact</a>
+      </div>
+    </nav>
+
+    <section class="hero">
+      <div class="hero_section">
+        <h1>Ask. Sort. Save the Planet.</h1>
+        <p>Instant answers for greener choices</p>
+        <a href="#">Search</a>
+      </div>
+    </section>
+
+    <div class="container">
+      <section id="home" class="features">
+        <div class="feature">
+          <i>♻️</i>
+          <h2>Disposal Guidance</h2>
+          <p>
+            Help residents understand complex local recycling and composting
+            rules. Users can send a photo of an item to learn the correct
+            disposal method.
+          </p>
+        </div>
+        <div class="feature">
+          <i>🍎</i>
+          <h2>Food Preservation Tips</h2>
+          <p>
+            Offer item-specific advice on food storage to prolong shelf life,
+            helping households reduce spoilage and save money.
+          </p>
+        </div>
+        <div class="feature">
+          <i>📍</i>
+          <h2>Location Assistance</h2>
+          <p>
+            Use geolocation to find nearest food scrap drop-off sites, recycling
+            centers, or donation points with operating hours.
+          </p>
+        </div>
+      </section>
+
+      <section id="about" class="about-section">
+        <h2>About Us</h2>
+        <p>
+          We are a hackathon team commited to building impactful solutions that
+          promote recycling and sustainability.
+        </p>
+        <p>
+          Team Members: Hazim Mohammed | Jessica Tu | Jacob T Madrid | Sarang
+          Menon
+        </p>
+      </section>
+
+      <section id="contact" class="contact-section">
+        <h2>Contact Us</h2>
+        <p>For inquiries or collaboration, reach out:</p>
+        <p>
+          Email:
+          <a href="mailto:contact@recycleright.earth"
+            >contact@recycleright.earth</a
+          >
+        </p>
+        <p>Phone: 0123-456-7890</p>
+      </section>
+    </div>
+
+    <footer>
+      <div class="footer-content">
+        <div class="footer-social">
+          <h4>Follow Us</h4>
+          <ul>
+            <li><a href="#" target="_blank">Facebook</a></li>
+            <li><a href="#" target="_blank">Twitter</a></li>
+            <li><a href="#" target="_blank">Instagram</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-nav">
+          <h4>Resources</h4>
+          <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <p>&copy; 2025 RecycleRight. All rights reserved.</p>
+    </footer>
+
+    <button id="chatbot-toggle">💬</button>
+
+    <div id="chatbot-widget">
+      <div class="chatbot-header">
+        <h2>Recycling Assistant</h2>
+        <button class="close-btn" id="close-chatbot">×</button>
+      </div>
+
+      <div id="chatbox">
+        <div class="message bot">
+          Hello! I'm your recycling assistant. Ask me anything about recycling!
+        </div>
+      </div>
+
+      <form class="chat-form" id="chat-form">
+        <input
+          type="text"
+          class="chat-input"
+          id="user-input"
+          placeholder="Ask me about recycling..."
+          required
+        />
+        <button type="submit" class="send-btn" id="send-btn">Send</button>
+      </form>
+    </div>
+
+    <script>
+      const features = document.querySelectorAll(
+        ".feature, .about-section, .contact-section"
+      );
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.style.opacity = 1;
+              entry.target.style.transform = "translateY(0)";
+            }
+          });
+        },
+        { threshold: 0.2 }
+      );
+      features.forEach((f) => observer.observe(f));
+
+      const API_KEY = "AIzaSyB2esO3n3b-AgYY1n50ikk0JWnpuZUyvnI";
+      const API_URL =
+        "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent";
+      const SYSTEM_CONTEXT =
+        "You are a helpful recycling assistant. Answer questions about what can be recycled, how to recycle items, and general recycling practices. Keep answers clear and concise.";
+
+      const chatbotToggle = document.getElementById("chatbot-toggle");
+      const chatbotWidget = document.getElementById("chatbot-widget");
+      const closeBtn = document.getElementById("close-chatbot");
+      const chatbox = document.getElementById("chatbox");
+      const form = document.getElementById("chat-form");
+      const userInput = document.getElementById("user-input");
+      const sendBtn = document.getElementById("send-btn");
+
+      chatbotToggle.addEventListener("click", () => {
+        chatbotWidget.classList.toggle("active");
+      });
+
+      closeBtn.addEventListener("click", () => {
+        chatbotWidget.classList.remove("active");
+      });
+
+      function appendMessage(text, className) {
+        const msgDiv = document.createElement("div");
+        msgDiv.className = "message " + className;
+        msgDiv.textContent = text;
+        chatbox.appendChild(msgDiv);
+        chatbox.scrollTop = chatbox.scrollHeight;
+      }
+
+      async function askChatbot(userQuestion) {
+        try {
+          const response = await fetch(`${API_URL}?key=${API_KEY}`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              contents: [
+                {
+                  parts: [
+                    {
+                      text: `${SYSTEM_CONTEXT}\n\nUser question: ${userQuestion}`,
+                    },
+                  ],
+                },
+              ],
+            }),
+          });
+
+          const data = await response.json();
+
+          if (data.candidates && data.candidates[0]) {
+            return data.candidates[0].content.parts[0].text;
+          } else if (data.error) {
+            console.error("API Error:", data.error);
+            return "Sorry, there was an API error: " + data.error.message;
+          } else {
+            return "Sorry, I could not generate a response.";
+          }
+        } catch (error) {
+          console.error("Error:", error);
+          return "Sorry, there was an error processing your question.";
+        }
+      }
+
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const question = userInput.value.trim();
+        if (!question) return;
+
+        appendMessage(question, "user");
+        userInput.value = "";
+        sendBtn.disabled = true;
+        sendBtn.textContent = "Sending...";
+
+        const answer = await askChatbot(question);
+        appendMessage(answer, "bot");
+
+        sendBtn.disabled = false;
+        sendBtn.textContent = "Send";
+      });
+    </script>
+  </body>
+</html>
